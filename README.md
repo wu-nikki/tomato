@@ -1,4 +1,4 @@
-#蕃茄鐘
+# 蕃茄鐘
 # default
 
 ## Project setup
