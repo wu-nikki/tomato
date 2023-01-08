@@ -27,9 +27,15 @@ export const useSettingsStore = defineStore({
   },
   actions: {
     async toggleNotify () {
+      // 如果通知狀態為 false
+      // 如果 window 有 'Notification' 通知功能
       if (!this.notify && 'Notification' in window) {
+        // 請求權限
+        // permission請求權限結果
         const permission = await Notification.requestPermission()
+        // granted 允許 denied 拒絕 default默認
         if (permission === 'granted') {
+          // 則轉為 true
           this.notify = true
         }
       } else {

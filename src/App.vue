@@ -1,6 +1,7 @@
 <template lang="pug">
 v-app
-  v-app-bar(color="indigoDarken")
+  v-app-bar(color="redDarken")
+    img(src="./assets/logo-bar.png")
     v-app-bar-title 蕃茄鐘
     v-spacer
     v-btn(icon="mdi-alarm" variant="text" to="/")
@@ -15,6 +16,7 @@ v-app
         keep-alive(include="HomeView")
           //- 動態元件，將元件以 is 傳入
           component(:is="Component")
+
 </template>
 
 <script setup>

@@ -7,11 +7,17 @@ export const useListStore = defineStore({
   id: 'list',
   state () {
     return {
+      // 新增
       items: [],
+      // 已完成
       finishedItems: [],
+      // 目前(要計時)
       currentItem: '',
+      // 事項唯一值
       id: 1,
+      // 休息
       break: false,
+      // 預設時間
       timeleft: time
     }
   },
@@ -26,6 +32,7 @@ export const useListStore = defineStore({
         model: name
       })
     },
+    // 開啟編輯
     editItem (id) {
       const i = this.getItemIndexById(id)
       // const i =this.items.findIndex(item=>item.id===id)
@@ -35,19 +42,23 @@ export const useListStore = defineStore({
       const i = this.getItemIndexById(id)
       this.items.splice(i, 1)
     },
+    // 確認編輯
     confirmEditItem (id) {
       const i = this.getItemIndexById(id)
       this.items[i].name = this.items[i].model
       this.items[i].edit = false
     },
+    // 取消編輯
     undoEditItem (id) {
       const i = this.getItemIndexById(id)
       this.items[i].model = this.items[i].name
       this.items[i].edit = false
     },
+    // 取得選擇該項目的 id 值
     getItemIndexById (id) {
       return this.items.findIndex(item => item.id === id)
     },
+    // 放在倒數事項中，要扣除其中一個事項
     start () {
       // this.currentItem = this.items[0].name
       // this.items.splice(0, 1)

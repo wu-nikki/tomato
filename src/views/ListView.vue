@@ -1,48 +1,53 @@
 <template lang="pug">
 v-row#list
-  v-col(cols="12")
-    h2.text-center 待辦事項
-  v-col(cols="12")
-    v-text-field(
-ref="input" v-model="newItem" label="新增事項" variant="solo" placeholder="Placeholder" :rules="[rules.required,rules.length]"
-      @keydown.enter="onInputSubmit")
-        template(#append)
-          v-btn(icon="mdi-plus" variant="text" @click="onInputSubmit" )
-    v-table
-      thead
-        tr
-          th 名稱
-          th 操作
-      tbody
-        tr(v-if="items.length===0")
-          td.text-center(colspan="2") 目前沒有事項
-        tr(v-for="item in items" :key="item.id" ref="editInputs" )
-          td
-            v-text-field(v-if="item.edit" v-model="item.model" autofocus :rules="[rules.required,rules.length]")
-            span(v-else) {{ item.name }}
-          td
-            span(v-if="item.edit")
-              v-btn(icon="mdi-check" variant="text" @click="confirmEditItem(item.id) ")
-              v-btn(icon="mdi-undo" variant="text" color="red" @click="undoEditItem(item.id) ")
-            span(v-else)
-              v-btn(icon="mdi-pencil" variant="text" @click="editItem(item.id)")
-              v-btn(icon="mdi-delete" variant="text" color="red" @click="delItem(item.id)")
-  v-divider
-  v-divider
-  v-col(cols="12")
-    h2.text-center 已完成事項
+  v-col.v-col-12.v-col-sm-6
+    v-col(cols="12")
+      h2.text-center 待辦事項
+    v-col(cols="12")
+      v-text-field(
+  ref="input" v-model="newItem" label="新增事項" variant="solo" placeholder="新增事項" :rules=" [rules.required,rules.length]"
+        @keydown.enter="onInputSubmit")
+          template(#append)
+            v-btn(icon="mdi-plus" variant="text" color="redLighten" @click="onInputSubmit" )
       v-table
         thead
           tr
             th 名稱
             th 操作
         tbody
-          tr(v-if="finishedItems.length===0")
+          tr(v-if="items.length===0")
             td.text-center(colspan="2") 目前沒有事項
-          tr(v-for="item in finishedItems" v-else :key="item.id" ref="editInputs" )
-            td {{ item.name }}
+          tr(v-for="item in items" :key="item.id" ref="editInputs" )
             td
-              v-btn(icon="mdi-delete" variant="text" color="red" @click="delFinishedItem(item.id)")
+              v-text-field(v-if="item.edit" v-model="item.model" autofocus :rules="[rules.required,rules.length] ")
+              span(v-else) {{ item.name }}
+            td
+              span(v-if="item.edit")
+                v-btn(icon="mdi-check" variant="text" color="greenDarken" @click="confirmEditItem(item.id) ")
+                v-btn(icon="mdi-undo" variant="text" color="redLighten" @click="undoEditItem(item.id) ")
+              span(v-else)
+                v-btn(
+  icon="mdi-pencil"
+                variant="text"
+                color="greenDarken" @click="editItem(item.id)")
+                v-btn(icon="mdi-delete" variant="text" color="redLighten" @click="delItem(item.id)")
+    v-divider
+    v-divider
+  v-col.v-col-12.v-col-sm-6
+    v-col(cols="12")
+      h2.text-center 已完成事項
+        v-table
+          thead
+            tr
+              th 名稱
+              th 操作
+          tbody
+            tr(v-if="finishedItems.length===0")
+              td.text-center(colspan="2") 目前沒有事項
+            tr(v-for="item in finishedItems" v-else :key="item.id" ref="editInputs" )
+              td {{ item.name }}
+              td
+                v-btn(icon="mdi-delete" variant="text" color="redLighten" @click="delFinishedItem(item.id)")
 </template>
 
 <script setup>

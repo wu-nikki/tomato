@@ -16,7 +16,7 @@ v-row#settings
           td
             audio(:src="alarm.file" controls)
           td
-            v-radio-group(v-model="selectedAlarms" color="indigoLighten1")
+            v-radio-group(v-model="selectedAlarms" color="redDarken2")
               v-radio(:value="alarm.id")
 </template>
 

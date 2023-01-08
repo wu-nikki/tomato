@@ -3,6 +3,7 @@
  *
  * Bootstraps Vuetify and other plugins then mounts the App`
  */
+import './main.sass'
 
 // Components
 import App from './App.vue'
